@@ -1,0 +1,63 @@
+{
+    "version": 1,
+    "author": "Eduardo Ramos",
+    "editor": "wokwi",
+    "parts": [
+      { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 96, "left": 120.04, "attrs": {} },
+      {
+        "type": "wokwi-dht22",
+        "id": "dht1",
+        "top": -57.3,
+        "left": -178.2,
+        "attrs": { "temperature": "50.4", "humidity": "73.5" }
+      },
+      {
+        "type": "wokwi-pushbutton",
+        "id": "btn1",
+        "top": 15.8,
+        "left": 345.6,
+        "attrs": { "color": "yellow", "bounce": "0", "label": "Fósforo (P)" }
+      },
+      {
+        "type": "wokwi-pushbutton",
+        "id": "btn2",
+        "top": 198.2,
+        "left": 326.4,
+        "attrs": { "color": "blue", "label": "Potássio (K)", "bounce": "0" }
+      },
+      {
+        "type": "wokwi-photoresistor-sensor",
+        "id": "ldr1",
+        "top": 387,
+        "left": 314.8,
+        "rotate": 180,
+        "attrs": {}
+      },
+      {
+        "type": "wokwi-relay-module",
+        "id": "relay1",
+        "top": -160.2,
+        "left": 186,
+        "rotate": 270,
+        "attrs": { "label": "Bomba dagua" }
+      }
+    ],
+    "connections": [
+      [ "esp:TX", "$serialMonitor:RX", "", [] ],
+      [ "esp:RX", "$serialMonitor:TX", "", [] ],
+      [ "dht1:VCC", "esp:5V", "red", [ "v0" ] ],
+      [ "dht1:GND", "esp:GND.2", "black", [ "v0" ] ],
+      [ "dht1:SDA", "esp:23", "green", [ "v0" ] ],
+      [ "ldr1:VCC", "esp:5V", "red", [ "h0" ] ],
+      [ "ldr1:GND", "esp:GND.3", "black", [ "h0" ] ],
+      [ "ldr1:AO", "esp:34", "green", [ "h0" ] ],
+      [ "btn2:2.l", "esp:GND.2", "black", [ "h0" ] ],
+      [ "btn2:1.r", "esp:21", "blue", [ "v0" ] ],
+      [ "esp:GND.2", "btn1:2.l", "black", [ "v0" ] ],
+      [ "btn1:1.r", "esp:22", "yellow", [ "v0" ] ],
+      [ "relay1:GND", "esp:GND.2", "black", [ "v0" ] ],
+      [ "relay1:VCC", "esp:5V", "red", [ "v220.8", "h67.2" ] ],
+      [ "esp:5", "relay1:IN", "magenta", [ "h67.2", "v-201.6" ] ]
+    ],
+    "dependencies": {}
+  }
